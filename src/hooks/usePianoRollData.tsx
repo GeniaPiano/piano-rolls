@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const usePianoRollData = () => {
+export const usePianoRollData = () => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
@@ -21,4 +21,4 @@ const usePianoRollData = () => {
     return data;
 };
 
-export default usePianoRollData;
+
