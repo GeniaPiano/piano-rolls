@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import {API_URL} from "../utils/apiUrl";
 
 export const usePianoRollData = () => {
     const [data, setData] = useState(null);
@@ -9,7 +10,7 @@ export const usePianoRollData = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await fetch('https://pianoroll.ai/random_notes');
+                const response = await fetch(API_URL);
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
@@ -21,7 +22,7 @@ export const usePianoRollData = () => {
                 setLoading(false);
             }
         })()
-    }, [counter])
+    }, [counter, reFetch])
 
 
 
