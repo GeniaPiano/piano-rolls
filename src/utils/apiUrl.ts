@@ -1,0 +1,1 @@
+export const API_URL: string = 'https://pianoroll.ai/random_notes';
