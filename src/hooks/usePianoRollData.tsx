@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 
 export const usePianoRollData = () => {
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [counter, setCounter] = useState<number>(0);
+    const reFetch = () => setCounter(prev => prev + 1)
 
     useEffect(() => {
         (async () => {
@@ -10,15 +13,23 @@ export const usePianoRollData = () => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                const data = await response.json();
-                setData(data);
+                const newData = await response.json();
+                setData(newData);
+                setLoading(false);
             } catch (error) {
                 console.error('Error loading data:', error);
+                setLoading(false);
             }
-        })();
-    }, []);
+        })()
+    }, [counter])
 
-    return data;
+
+
+    return { data, loading, reFetch};
 };
+
+
+
+
 
 
