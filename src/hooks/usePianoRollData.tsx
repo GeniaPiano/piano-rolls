@@ -1,11 +1,17 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import {API_URL} from "../utils/apiUrl";
 
 export const usePianoRollData = () => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [counter, setCounter] = useState<number>(0);
-    const reFetch = () => setCounter(prev => prev + 1)
+
+    const reFetch = useCallback(() => {
+        if (!loading) {
+            setLoading(true);
+            setCounter(prev => prev + 1);
+        }
+    }, [loading])
 
     useEffect(() => {
         (async () => {
