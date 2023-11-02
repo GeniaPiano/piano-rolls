@@ -21,7 +21,12 @@ export const usePianoRollData = () => {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const newData = await response.json();
-                setData(newData);
+                const dataWithUniqueId = newData.map((roll, index) => ({
+                    ...roll,
+                    id: `roll_${index}`
+                }))
+
+                setData(dataWithUniqueId);
                 setLoading(false);
             } catch (error) {
                 console.error('Error loading data:', error);
