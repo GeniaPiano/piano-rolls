@@ -4,7 +4,7 @@ import {useSelectedRollAndView} from "../../providers/SelectedRollAndViewProvide
 
 export const MainRollDisplayView = () => {
 
-    const {selectedPianoRoll} = useSelectedRollAndView()
+    const {selectedPianoRoll} = useSelectedRollAndView();
 
 
 
