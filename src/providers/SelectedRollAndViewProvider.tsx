@@ -3,7 +3,7 @@ import {createContext, useContext, useState} from "react";
 interface SelectedRollContext {
     isGridView: boolean;
     isMainView: boolean;
-    selectedPianoRoll: number | null;
+    selectedPianoRoll: string;
     handleSelectRoll: (id: number)=> void;
     changeGridView: (bool: boolean) => void;
     changeIsMainView: (bool: boolean) => void;
@@ -13,7 +13,7 @@ const SelectedRollContext = createContext<SelectedRollContext | undefined>(undef
 
 export const SelectedRollProvider = ({ children }) => {
     const [isGridView, setIsGridView] = useState(false);
-    const [selectedPianoRoll, setSelectedPianoRoll] = useState<number | null>(null);
+    const [selectedPianoRoll, setSelectedPianoRoll] = useState<string>(null);
     const [isMainView, setIsMainView] = useState(false);
 
     const changeGridView =(bool: boolean)=> setIsGridView(bool);

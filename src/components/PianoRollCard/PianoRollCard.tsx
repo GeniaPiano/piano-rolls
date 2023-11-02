@@ -6,10 +6,10 @@ import {useSelectedRollAndView} from "../../providers/SelectedRollAndViewProvide
 
 interface Props {
     index: number;
-
+    isSmall: boolean;
 }
 
-export const PianoRollCard = ({ index} : Props) => {
+export const PianoRollCard = ({ index, isSmall} : Props) => {
     const {handleSelectRoll, selectedPianoRoll, changeGridView, changeIsMainView} = useSelectedRollAndView();
     const [sequence, setSequence] = useState([]);
     const {data: apiData} = usePianoRollData();
@@ -32,12 +32,12 @@ export const PianoRollCard = ({ index} : Props) => {
 
     return (
         <div
-            className={`piano-roll-card ${isSelected ? 'selected' : ''}`}
+            className={`piano-roll-card ${isSelected ? 'selected' : ''} ${isSmall} ? 'small' : ''`}
             onClick={handleCardClick}>
             <div className="description">
                 This is a piano roll number {index + 1}
             </div>
-            <div >
+            <div>
                 <SvgItem sequence={sequence} />
             </div>
         </div>

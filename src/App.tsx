@@ -12,8 +12,8 @@ import {MainLayout} from "./components/MainLayout/MainLayout";
 export const App = () => {
     const [showPianoRoll, setShowPianoRoll] = useState(false);
     const [dataLoaded, setDataLoaded] = useState(false);
-    const {loading, reFetch } = usePianoRollData();
-    const {isGridView, changeGridView, isMainView} = useSelectedRollAndView();
+    const {loading, reFetch} = usePianoRollData();
+    const {isGridView, changeGridView, isMainView, changeIsMainView} = useSelectedRollAndView();
 
     const handleClick = async () => {
         if (!dataLoaded) {
@@ -35,6 +35,19 @@ export const App = () => {
             <MainLayout>
 
                 <div className="app">
+
+                    {/*BUTTONY DLA TESTU*/}
+                    <button onClick={()=> {
+                        setShowPianoRoll(true);
+                        setDataLoaded(true);
+                        changeGridView(true);
+                    }}>
+                        grid</button>
+                    <button onClick={()=> {
+                        changeGridView(false);
+                        changeIsMainView(true);
+                    }}>main</button>
+
                        <div className="buttonContainer">
                              <button onClick={handleClick}>Load Piano Rolls!</button>
                         </div>
@@ -45,8 +58,6 @@ export const App = () => {
 
                     {!isGridView && !loading && isMainView
                         && <MainRollDisplayView/>}
-
-
                 </div>
 
             </MainLayout>
