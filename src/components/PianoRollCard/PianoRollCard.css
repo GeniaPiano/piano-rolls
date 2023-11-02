@@ -6,10 +6,23 @@
     border: 1px solid #ccc;
     margin-bottom: 10px;
     padding: 10px;
-    width: 50%;
+    width: 70%;
     box-sizing: border-box;
+    transition: 0.4s;
 }
 
+.piano-roll-card:hover {
+    background-color: #e3dfdf;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.piano-roll-card.selected {
+    background-color: #eab0ea;
+}
+
+
+
 .description {
-    margin-top: 10px;
+    margin: 10px auto;
 }

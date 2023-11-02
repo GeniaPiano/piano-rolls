@@ -1,0 +1,14 @@
+.main-view {
+    width: 100%;
+    display: flex;
+}
+
+.main-roll {
+    flex: 2;
+
+}
+
+.small-rolls {
+    flex: 1;
+
+}
