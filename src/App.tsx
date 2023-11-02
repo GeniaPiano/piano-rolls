@@ -1,35 +1,61 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import { Navbar } from './components/Navbar/Navbar';
 import {usePianoRollData} from "./hooks/usePianoRollData";
 import {PianoRollDisplay} from "./components/PianoRollDisplay/PianoRollDisplay";
+import {MainRollDisplayView} from "./components/MainRollDisplayView/MainRollDisplayView";
+import {useSelectedRollAndView} from "./providers/SelectedRollAndViewProvider";
+import {MainLayout} from "./components/MainLayout/MainLayout";
+
+
 
 
 export const App = () => {
     const [showPianoRoll, setShowPianoRoll] = useState(false);
     const [dataLoaded, setDataLoaded] = useState(false);
-    const { data, loading, reFetch } = usePianoRollData();
+    const {loading, reFetch } = usePianoRollData();
+    const {isGridView, changeGridView, isMainView} = useSelectedRollAndView();
 
     const handleClick = async () => {
         if (!dataLoaded) {
             setShowPianoRoll(true);
             setDataLoaded(true);
-        } else {
-            await reFetch();
-            console.log('refetch')
-
+            changeGridView(true);
+                    }
+        else {
+             await reFetch();
+            setShowPianoRoll(true);
+            setDataLoaded(true);
+            changeGridView(true);
         }
     };
 
     return (
-        <div className="app">
-            <Navbar />
-            <h1>Welcome to PianoRoll frontend coding challenge!</h1>
-            <div className="buttonContainer">
-                <button id="loadCSV" onClick={handleClick}>Load Piano Rolls!</button>
-            </div>
-            {showPianoRoll && !loading && <PianoRollDisplay data={data} />} {/* Wyświetl PianoRollDisplay z nowymi danymi */}
-        </div>
+
+
+            <MainLayout>
+
+                <div className="app">
+                       <div className="buttonContainer">
+                             <button onClick={handleClick}>Load Piano Rolls!</button>
+                        </div>
+
+                    {!loading && showPianoRoll && isGridView
+                        &&  <PianoRollDisplay setShowPianoRoll={setShowPianoRoll}
+                        />}
+
+                    {!isGridView && !loading && isMainView
+                        && <MainRollDisplayView/>}
+
+
+                </div>
+
+            </MainLayout>
+
+
+
+
+
+
     );
 };
 
