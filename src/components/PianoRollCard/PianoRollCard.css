@@ -6,7 +6,7 @@
     border: 1px solid #ccc;
     margin-bottom: 10px;
     padding: 10px;
-    width: 70%;
+    width: 80%;
     box-sizing: border-box;
     transition: 0.4s;
 }
@@ -18,13 +18,8 @@
 }
 
 .piano-roll-card.selected {
-    background-color: #eab0ea;
+    background-color: #f1b7b2;
 }
-
-.piano-roll-card.small {
-
-}
-
 
 .description {
     margin: 10px auto;
