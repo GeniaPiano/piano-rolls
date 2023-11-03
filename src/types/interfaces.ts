@@ -5,3 +5,9 @@ export interface SingleNoteData{
     start: number;
     velocity: number;
 }
+
+
+export type SingleRollData = SingleNoteData[];
+
+
+export type DataForTwentyRolls = SingleRollData[];
