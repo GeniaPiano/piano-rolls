@@ -19,8 +19,10 @@ export const useGetPianoRollData = () => {
                         if (!response.ok) {
                             throw new Error(`HTTP error! Status: ${response.status}`);
                         }
-                        const singleRollData = (await response.json()) as SingleRollData
-                        newData.push(singleRollData)
+                        //added id to one single roll data
+                        const singleRollData = (await response.json()) as SingleRollData;
+                        newData.push({ id: i + 1, oneRollData: singleRollData });
+
                     }
                     setData(newData)
                     setIsLoading(false);

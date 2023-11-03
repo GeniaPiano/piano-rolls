@@ -1,4 +1,4 @@
-export interface SingleNoteData{
+export interface SingleNoteData {
     duration: number;
     end: number;
     pitch: number;
@@ -6,8 +6,11 @@ export interface SingleNoteData{
     velocity: number;
 }
 
-
 export type SingleRollData = SingleNoteData[];
 
+export interface OneRollData {
+    id: number;
+    oneRollData: SingleRollData;
+}
 
-export type DataForTwentyRolls = SingleRollData[];
+export type DataForTwentyRolls = OneRollData[];
