@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { generateGradientTable } from "../../utils/generateGradientTable";
 import { SingleNoteData } from "../../types/interfaces";
 import './Svg.Item.css'
@@ -9,6 +9,39 @@ interface Props {
 }
 
 export const SvgItem = ({ sequence, isSmall } : Props) => {
+
+    const [isSelecting, setIsSelecting] = useState(false);
+    const [selectionStartX, setSelectionStartX] = useState(null);
+    const [selectionEndX, setSelectionEndX] = useState(null);
+
+
+    const handleMouseDown = (e) => {
+        e.preventDefault();
+        setIsSelecting(true);
+        const startX = e.nativeEvent.offsetX;
+        setSelectionStartX(startX);
+        setSelectionEndX(startX);
+    };
+
+    const handleMouseMove = (e) => {
+        if (isSelecting) {
+            const endX = e.nativeEvent.offsetX;
+            setSelectionEndX(endX);
+        }
+    };
+
+    const handleMouseUp = () => {
+        setIsSelecting(false);
+    };
+
+    const handleMouseLeave = () => {
+        if (isSelecting) {
+            setIsSelecting(false);
+            setSelectionStartX(null);
+            setSelectionEndX(null);
+        }
+    };
+
     const backgroundStartColor = { r: 93, g: 181, b: 213 };
     const backgroundEndColor = { r: 21, g: 65, b: 81 };
     const backgroundColormap = generateGradientTable(backgroundStartColor, backgroundEndColor, 128);
@@ -42,7 +75,23 @@ export const SvgItem = ({ sequence, isSmall } : Props) => {
 
     return (
         <div >
-            <svg className="piano-roll-svg" width="80%" height={isSmall ? 100 : 200}>
+            <svg
+                className="piano-roll-svg"
+                width="80%"
+                height={isSmall ? 100 : 200}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseLeave}
+            >
+                {/*rendering selection*/}
+                <rect
+                    x={Math.min(selectionStartX, selectionEndX)}
+                    y="0"
+                    width={Math.abs(selectionEndX - selectionStartX)}
+                    height="100%"
+                    fill="rgba(0, 0, 255, 0.3)" // selection color
+                />
                 {Array.from({ length: pitch_max - pitch_min + 2 }, (_, index) => {
                     const it = index + pitch_min;
                     return (
@@ -82,7 +131,7 @@ export const SvgItem = ({ sequence, isSmall } : Props) => {
                             y={y}
                             height={note_height * 100 + "%"}
                             fill={color}
-                        />
+                         />
                     );
                 })}
             </svg>
