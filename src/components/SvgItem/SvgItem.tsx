@@ -1,13 +1,14 @@
-import './Svg.Item.css'
 import React from "react";
 import { generateGradientTable } from "../../utils/generateGradientTable";
-import {SingleNoteData} from "../../types/interfaces";
+import { SingleNoteData } from "../../types/interfaces";
+import './Svg.Item.css'
 
 interface Props {
     sequence: SingleNoteData[];
+    isSmall: boolean;
 }
 
-export const SvgItem = ({ sequence } : Props) => {
+export const SvgItem = ({ sequence, isSmall } : Props) => {
     const backgroundStartColor = { r: 93, g: 181, b: 213 };
     const backgroundEndColor = { r: 21, g: 65, b: 81 };
     const backgroundColormap = generateGradientTable(backgroundStartColor, backgroundEndColor, 128);
@@ -41,7 +42,7 @@ export const SvgItem = ({ sequence } : Props) => {
 
     return (
         <div >
-            <svg className="piano-roll-svg" width="80%" height="150">
+            <svg className="piano-roll-svg" width="80%" height={isSmall ? 100 : 200}>
                 {Array.from({ length: pitch_max - pitch_min + 2 }, (_, index) => {
                     const it = index + pitch_min;
                     return (
