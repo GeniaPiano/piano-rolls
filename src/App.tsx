@@ -1,72 +1,44 @@
-import React, {useState} from 'react';
+import { useGetPianoRollData } from "./hooks/useGetPianoRollData";
+import { PianoRollDisplay } from "./components/PianoRollDisplay/PianoRollDisplay";
+import { MainLayout } from "./components/MainLayout/MainLayout";
+import { BrowserRouter as Router, Routes, Route, NavLink} from "react-router-dom";
+import {MainView} from "./components/MainView/MainView";
 import './App.css';
-import {usePianoRollData} from "./hooks/usePianoRollData";
-import {PianoRollDisplay} from "./components/PianoRollDisplay/PianoRollDisplay";
-import {MainRollDisplayView} from "./components/MainRollDisplayView/MainRollDisplayView";
-import {useSelectedRollAndView} from "./providers/SelectedRollAndViewProvider";
-import {MainLayout} from "./components/MainLayout/MainLayout";
-
-
 
 
 export const App = () => {
-    const [showPianoRoll, setShowPianoRoll] = useState(false);
-    const [dataLoaded, setDataLoaded] = useState(false);
-    const {loading, reFetch} = usePianoRollData();
-    const {isGridView, changeGridView, isMainView, changeIsMainView} = useSelectedRollAndView();
 
-    const handleClick = async () => {
-        if (!dataLoaded) {
-            setShowPianoRoll(true);
-            setDataLoaded(true);
-            changeGridView(true);
-                    }
-        else {
-             await reFetch();
-            setShowPianoRoll(true);
-            setDataLoaded(true);
-            changeGridView(true);
-        }
-    };
+    const { data, isLoading, reFetch, fetchTrigger } = useGetPianoRollData();
+
 
     return (
 
-
-            <MainLayout>
-
-                <div className="app">
-
-                    {/*BUTTONY DLA TESTU*/}
-                    <button onClick={()=> {
-                        setShowPianoRoll(true);
-                        setDataLoaded(true);
-                        changeGridView(true);
-                    }}>
-                        grid</button>
-                    <button onClick={()=> {
-                        changeGridView(false);
-                        changeIsMainView(true);
-                    }}>main</button>
-
+            <Router>
+             <MainLayout>
+                   <div className="app">
                        <div className="buttonContainer">
-                             <button onClick={handleClick}>Load Piano Rolls!</button>
-                        </div>
+                             <button>
+                                 <NavLink to='/grid-layout' onClick={() => {
+                                     if (fetchTrigger > 0) {
+                                         reFetch();
+                                     }}}>Load Piano Rolls!</NavLink>
+                             </button>
+                       </div>
 
-                    {!loading && showPianoRoll && isGridView
-                        &&  <PianoRollDisplay setShowPianoRoll={setShowPianoRoll}
-                        />}
-
-                    {!isGridView && !loading && isMainView
-                        && <MainRollDisplayView/>}
+                        <Routes>
+                            <Route exact path={'/'}
+                                   element={null}/>
+                            <Route path={'/grid-layout'}
+                                element={<PianoRollDisplay
+                                data={data}
+                                isLoading={isLoading}
+                                />}/>
+                            <Route path={'/main-view'}
+                                   element={<MainView data={data}/>} />
+                        </Routes>
                 </div>
-
             </MainLayout>
-
-
-
-
-
-
+            </Router>
     );
 };
 
