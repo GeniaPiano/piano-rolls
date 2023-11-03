@@ -1,0 +1,31 @@
+
+.main-view {
+    border: 1px solid #bebdbd;
+    display: flex;
+    height: 75vh;
+    margin: 10px 80px;
+}
+
+.left-section {
+    flex: 3;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+
+.right-section {
+    flex: 1;
+    overflow-y: scroll;
+}
+
+.piano-rolls-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+
+
+
+

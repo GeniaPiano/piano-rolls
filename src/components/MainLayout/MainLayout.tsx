@@ -1,6 +1,5 @@
+import { Navbar } from "../Navbar/Navbar";
 import './MainLayout.css'
-import {Navbar} from "../Navbar/Navbar";
-import React from "react";
 
 
 export const MainLayout = ({children}) => {
@@ -12,6 +11,5 @@ return (
            {children}
        </div>
 
-)
-
+  )
 }

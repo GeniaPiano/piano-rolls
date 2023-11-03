@@ -1,6 +1,6 @@
-import {useState, useEffect} from 'react';
-import {API_URL} from "../utils/apiUrl";
-import {DataForTwentyRolls, SingleRollData} from "../types/interfaces";
+import { useState, useEffect } from 'react';
+import { API_URL } from "../utils/apiUrl";
+import { DataForTwentyRolls, SingleRollData } from "../types/interfaces";
 
 export const useGetPianoRollData = () => {
     const [data, setData] = useState<DataForTwentyRolls>([])

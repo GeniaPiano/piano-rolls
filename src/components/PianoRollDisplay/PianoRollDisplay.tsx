@@ -1,12 +1,14 @@
+import { PianoRollCard } from "../PianoRollCard/PianoRollCard";
+import { DataForTwentyRolls } from "../../types/interfaces";
 import './PianoRollDisplay.css'
-import {usePianoRollData} from "../../hooks/usePianoRollData";
-import {PianoRollCard} from "../PianoRollCard/PianoRollCard";
 
+interface Props {
+    isLoading: boolean;
+    data: DataForTwentyRolls;
+}
 
-export const PianoRollDisplay = ({setShowPianoRoll}) => {
-    const { data, loading } = usePianoRollData();
-
-    if (loading) {
+export const PianoRollDisplay = ({ data, isLoading}: Props) => {
+    if (isLoading) {
         return <div>Loading...</div>;
     }
 
@@ -16,12 +18,11 @@ export const PianoRollDisplay = ({setShowPianoRoll}) => {
 
     return (
             <div className="grid-container" >
-                {data.slice(0, 20).map((rollData, index) =>
+                {data.slice(0, 20).map((rollData) =>
                     <PianoRollCard
-                        key={index}
-                        index={index}
-                        data={rollData}
-                        setShowPianoRoll={setShowPianoRoll}
+                        key={rollData.id}
+                        index={rollData.id-1}
+                        rollData={rollData}
                         isSelected
                         isSmall={false}/>)
                 }
