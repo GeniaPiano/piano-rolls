@@ -11,7 +11,7 @@ export const MainView = ({ data }: Props) => {
 
     const { selectedPianoRoll } = useSelectedRollAndView();
     const idToRemove = selectedPianoRoll;
-    if (data === null) {
+    if (!data) {
         return <div>Loading...</div>;
     }
 
