@@ -30,12 +30,14 @@
     overflow-y: scroll;
 }
 
+
 @media (max-width: 767px) {
     .right-section {
         flex: 1;
         overflow-y: scroll;
     }
 }
+
 
 .piano-rolls-list {
     display: flex;
