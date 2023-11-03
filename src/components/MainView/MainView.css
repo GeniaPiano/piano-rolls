@@ -6,16 +6,36 @@
     margin: 10px 80px;
 }
 
+@media (max-width: 767px) {
+    .main-view {
+        margin: 10px;
+    }
+}
+
 .left-section {
     flex: 3;
     height: 100vh;
     overflow-y: auto;
 }
 
+@media (max-width: 767px) {
+    .left-section {
+        flex: 2;
+        overflow-y: scroll;
+    }
+}
+
 
 .right-section {
     flex: 1;
     overflow-y: scroll;
+}
+
+@media (max-width: 767px) {
+    .right-section {
+        flex: 1;
+        overflow-y: scroll;
+    }
 }
 
 .piano-rolls-list {
