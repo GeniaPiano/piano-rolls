@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { generateGradientTable } from "../../utils/generateGradientTable";
 import { SingleNoteData } from "../../types/interfaces";
 import './Svg.Item.css'
@@ -13,7 +13,6 @@ export const SvgItem = ({ sequence, isSmall } : Props) => {
     const [isSelecting, setIsSelecting] = useState(false);
     const [selectionStartX, setSelectionStartX] = useState(null);
     const [selectionEndX, setSelectionEndX] = useState(null);
-
 
     const handleMouseDown = (e) => {
         e.preventDefault();
@@ -41,6 +40,8 @@ export const SvgItem = ({ sequence, isSmall } : Props) => {
             setSelectionEndX(null);
         }
     };
+
+
 
     const backgroundStartColor = { r: 93, g: 181, b: 213 };
     const backgroundEndColor = { r: 21, g: 65, b: 81 };
@@ -74,7 +75,7 @@ export const SvgItem = ({ sequence, isSmall } : Props) => {
     const note_height = 1 / pitch_span;
 
     return (
-        <div >
+        <div>
             <svg
                 className="piano-roll-svg"
                 width="80%"
@@ -90,7 +91,9 @@ export const SvgItem = ({ sequence, isSmall } : Props) => {
                     y="0"
                     width={Math.abs(selectionEndX - selectionStartX)}
                     height="100%"
-                    fill="rgba(0, 0, 255, 0.3)" // selection color
+                    fill="rgba(144, 6, 111, 0.3)"
+                    stroke="blue"
+                    strokeWidth="0 2"
                 />
                 {Array.from({ length: pitch_max - pitch_min + 2 }, (_, index) => {
                     const it = index + pitch_min;
