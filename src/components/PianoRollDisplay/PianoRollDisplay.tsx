@@ -1,6 +1,7 @@
 import { PianoRollCard } from "../PianoRollCard/PianoRollCard";
 import { DataForTwentyRolls } from "../../types/interfaces";
 import './PianoRollDisplay.css'
+import { MusicalSpinner } from "../MusicalSpinner/MusicalSpinner";
 
 interface Props {
     isLoading: boolean;
@@ -9,12 +10,12 @@ interface Props {
 
 export const PianoRollDisplay = ({ data, isLoading}: Props) => {
     if (isLoading) {
-        return <div>Loading...</div>;
+        return  <MusicalSpinner/>;
     }
 
-    if (!data || data.length === 0) {
-        return <div>No data available</div>;
-    }
+    // if ((!data || data.length === 0) && !isLoading) {
+    //     return <div>No data available</div>;
+    // }
 
     return (
             <div className="grid-container" >
@@ -23,7 +24,6 @@ export const PianoRollDisplay = ({ data, isLoading}: Props) => {
                         key={rollData.id}
                         index={rollData.id-1}
                         rollData={rollData}
-                        isSelected
                         isSmall={false}/>)
                 }
             </div>
