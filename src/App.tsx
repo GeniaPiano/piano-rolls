@@ -9,18 +9,23 @@ import './App.css';
 
 
 export const App = () => {
-    const { data, isLoading, reFetch, fetchTrigger } = useGetPianoRollData();
+    const { data, isLoading, reFetch } = useGetPianoRollData();
     const { handleSelectRoll } = useSelectedRollAndView();
     return (
             <Router>
              <MainLayout>
                    <div >
                        <div className="buttonContainer">
-                             <button onClick={()=> handleSelectRoll(0)}>
-                                 <NavLink to='/grid-layout' onClick={() => {
-                                     if (fetchTrigger > 0) {
-                                         reFetch();
-                                     }}}>Load Piano Rolls!</NavLink>
+                             <button
+                                 className={isLoading? "disable" : ''}
+                                 onClick={()=> handleSelectRoll(0)}>
+                                 <NavLink to='/grid-layout'
+                                          onClick={() => {
+                                              if (!isLoading) reFetch();
+                                          }}
+                                 >
+                                     Load Piano Rolls!
+                                 </NavLink>
                              </button>
                        </div>
 
