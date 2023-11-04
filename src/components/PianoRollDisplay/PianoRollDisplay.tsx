@@ -13,9 +13,9 @@ export const PianoRollDisplay = ({ data, isLoading}: Props) => {
         return  <MusicalSpinner/>;
     }
 
-    // if ((!data || data.length === 0) && !isLoading) {
-    //     return <div>No data available</div>;
-    // }
+    if ((!data || data.length === 0) && !isLoading) {
+        return <div>No data available</div>;
+    }
 
     return (
             <div className="grid-container" >
